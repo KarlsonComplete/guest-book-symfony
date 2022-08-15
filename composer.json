@@ -4,15 +4,19 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-bundle": "^2.7",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.13",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "v5.4.11",
         "symfony/dotenv": "v5.4.5",
         "symfony/flex": "v2.2.3",
         "symfony/framework-bundle": "v5.4.11",
         "symfony/monolog-bundle": "v3.8.0",
+        "symfony/proxy-manager-bridge": "5.4.*",
         "symfony/yaml": "*"
     },
     "require-dev": {
