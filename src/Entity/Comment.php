@@ -26,9 +26,10 @@ class Comment
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Conference $conference = null;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="comments")
+     */
+    private $conference;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
