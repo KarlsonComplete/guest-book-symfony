@@ -27,7 +27,7 @@ class Conference
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="conference")
      */
-    private $comments;
+    private ArrayCollection $comments;
 
     public function __construct()
     {
@@ -81,7 +81,7 @@ class Conference
     }
 
     /**
-     * @return Collection<int, Comment>
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments(): Collection
     {

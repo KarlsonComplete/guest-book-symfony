@@ -29,7 +29,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="comments")
      */
-    private $conference;
+    private ?Conference $conference;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
