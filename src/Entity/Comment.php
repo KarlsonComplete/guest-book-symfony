@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Persisters\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,10 +28,9 @@ class Comment
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="comments")
-     */
-    private ?Conference $conference;
+    #[ORM\ManyToOne(targetEntity:Conference::class, inversedBy: "comments",)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $conference;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;

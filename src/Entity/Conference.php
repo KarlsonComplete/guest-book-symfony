@@ -6,6 +6,7 @@ use App\Repository\ConferenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 class Conference
@@ -24,12 +25,11 @@ class Conference
     #[ORM\Column]
     private ?bool $isInternational = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="conference")
-     */
-    private ArrayCollection $comments;
 
-    public function __construct()
+    #[ORM\OneToMany(mappedBy: "conference", targetEntity: Comment::class, orphanRemoval: true)]
+    private  $comments;
+
+    #[Pure] public function __construct()
     {
         $this->comments = new ArrayCollection();
     }
@@ -81,7 +81,7 @@ class Conference
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Comment[]
      */
     public function getComments(): Collection
     {
@@ -91,7 +91,7 @@ class Conference
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
+            $this->comments[] = $comment;
             $comment->setConference($this);
         }
 
@@ -100,7 +100,8 @@ class Conference
 
     public function removeComment(Comment $comment): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->comments->contains($comment)){
+        $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
             if ($comment->getConference() === $this) {
                 $comment->setConference(null);
