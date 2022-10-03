@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
+
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 class Conference
 {
@@ -27,7 +28,7 @@ class Conference
 
 
     #[ORM\OneToMany(mappedBy: "conference", targetEntity: Comment::class, orphanRemoval: true)]
-    private  $comments;
+    private $comments;
 
     #[Pure] public function __construct()
     {
