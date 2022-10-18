@@ -26,9 +26,11 @@ class Conference
     #[ORM\Column]
     private ?bool $isInternational = null;
 
-
     #[ORM\OneToMany(mappedBy: "conference", targetEntity: Comment::class, orphanRemoval: true)]
     private $comments;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     #[Pure] public function __construct()
     {
@@ -108,6 +110,18 @@ class Conference
                 $comment->setConference(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
